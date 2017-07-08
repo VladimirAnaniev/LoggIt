@@ -61,7 +61,7 @@ function validateLoginForm (payload) {
   }
 }
 
-router.post('/signup', (req, res, next) => {
+router.post('/register', (req, res, next) => {
   const validationResult = validateSignupForm(req.body)
   if (!validationResult.success) {
     return res.status(200).json({
