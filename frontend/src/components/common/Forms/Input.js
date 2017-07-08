@@ -1,5 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+`
 
 Input.propTypes = {
   name: PropTypes.string,
@@ -13,7 +24,7 @@ export default function Input ({type = 'text', name, placeholder, value, onChang
   return (
     <div>
       <label htmlFor={name}>{placeholder} </label>
-      <input
+      <StyledInput
         type={type}
         name={name}
         value={value}

@@ -1,6 +1,8 @@
 import React from 'react'
-import Input from '../../common/Input'
+import Input from '../../common/Forms/Input'
 import PropTypes from 'prop-types'
+import StyledForm from '../../common/Forms/StyledForm'
+import StyledButton from '../../common/Forms/StyledButton'
 
 Input.propTypes = {
   user: PropTypes.shape({
@@ -17,7 +19,7 @@ Input.propTypes = {
 export default function RegisterForm ({user, error, onChange, onSubmit}) {
   return (
     <div className='container'>
-      <form>
+      <StyledForm>
         <div className='error'>{error}</div>
         <Input
           type='email'
@@ -45,8 +47,8 @@ export default function RegisterForm ({user, error, onChange, onSubmit}) {
           value={user.name}
           placeholder='Name'
           onChange={onChange} />
-        <input type='submit' value='register' onClick={onSubmit} />
-      </form>
+        <StyledButton type='submit' value='Register' onClick={onSubmit} />
+      </StyledForm>
     </div>
   )
 }

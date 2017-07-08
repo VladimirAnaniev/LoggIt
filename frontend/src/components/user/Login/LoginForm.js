@@ -1,6 +1,8 @@
 import React from 'react'
-import Input from '../../common/Input'
+import Input from '../../common/Forms/Input'
 import PropTypes from 'prop-types'
+import StyledForm from '../../common/Forms/StyledForm'
+import StyledButton from '../../common/Forms/StyledButton'
 
 Input.propTypes = {
   user: PropTypes.shape({
@@ -15,7 +17,7 @@ Input.propTypes = {
 export default function LoginForm ({user, error, onChange, onSubmit}) {
   return (
     <div className='container'>
-      <form>
+      <StyledForm>
         <div className='error'>{error}</div>
         <Input
           type='email'
@@ -30,9 +32,9 @@ export default function LoginForm ({user, error, onChange, onSubmit}) {
           value={user.password}
           placeholder='Password'
           onChange={onChange} />
-        <input type='submit' value='login' onClick={onSubmit} />
+        <StyledButton type='submit' value='Login' onClick={onSubmit} />
         <br />
-      </form>
+      </StyledForm>
     </div>
   )
 }
