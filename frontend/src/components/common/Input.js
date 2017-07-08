@@ -1,16 +1,24 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-export default function Input (props) {
-  let type = props.type || 'text'
+Input.propTypes = {
+  name: PropTypes.string,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func
+}
+
+export default function Input ({type = 'text', name, placeholder, value, onChange}) {
   return (
     <div>
-      <label htmlFor={props.name}>{props.placeholder} </label>
+      <label htmlFor={name}>{placeholder} </label>
       <input
         type={type}
-        name={props.name}
-        value={props.value}
-        placeholder={props.placeholder}
-        onChange={props.onChange} />
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange} />
     </div>
   )
 }

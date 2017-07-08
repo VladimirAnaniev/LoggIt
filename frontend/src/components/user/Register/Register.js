@@ -2,8 +2,32 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { register, changeRegisterForm} from '../../../actions/authActions'
 import RegisterForm from './RegisterForm'
+import PropTypes from 'prop-types'
 
 class Register extends Component {
+  static propTypes = {
+    formState: PropTypes.shape({
+      email: PropTypes.string,
+      password: PropTypes.string,
+      confirmPassword: PropTypes.string,
+      name: PropTypes.string
+    }),
+    loading: PropTypes.bool,
+    error: PropTypes.string,
+    dispatch: PropTypes.func
+  }
+
+  static defaultProps = {
+    formState: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+      name: ''
+    },
+    loading: false,
+    error: ''
+  }
+
   handleFormSubmit = (event) => {
     event.preventDefault()
     this.props.dispatch(register(this.props.formState))

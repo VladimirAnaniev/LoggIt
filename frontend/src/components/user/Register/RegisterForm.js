@@ -1,38 +1,51 @@
 import React from 'react'
 import Input from '../../common/Input'
+import PropTypes from 'prop-types'
 
-export default function RegisterForm (props) {
+Input.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string,
+    password: PropTypes.string,
+    confirmPassword: PropTypes.string,
+    name: PropTypes.string
+  }),
+  error: PropTypes.string,
+  onChange: PropTypes.func,
+  onSubmit: PropTypes.func
+}
+
+export default function RegisterForm ({user, error, onChange, onSubmit}) {
   return (
     <div className='container'>
       <form>
-        <div className='error'>{props.error}</div>
+        <div className='error'>{error}</div>
         <Input
           type='email'
           name='email'
-          value={props.user.email}
+          value={user.email}
           placeholder='E-mail'
-          onChange={props.onChange} />
+          onChange={onChange} />
         <br />
         <Input
           type='password'
           name='password'
-          value={props.user.password}
+          value={user.password}
           placeholder='Password'
-          onChange={props.onChange} />
+          onChange={onChange} />
         <br />
         <Input
           type='password'
           name='confirmPassword'
-          value={props.user.confirmPassword}
+          value={user.confirmPassword}
           placeholder='Confirm-Password'
-          onChange={props.onChange} />
+          onChange={onChange} />
         <br />
         <Input
           name='name'
-          value={props.user.name}
+          value={user.name}
           placeholder='Name'
-          onChange={props.onChange} />
-        <input type='submit' value='register' onClick={props.onSubmit} />
+          onChange={onChange} />
+        <input type='submit' value='register' onClick={onSubmit} />
       </form>
     </div>
   )

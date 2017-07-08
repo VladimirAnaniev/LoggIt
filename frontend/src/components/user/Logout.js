@@ -1,8 +1,7 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Auth from '../../utilities/Auth'
-import { connect } from 'react-redux'
 
-class Logout extends React.Component {
+export default class Logout extends Component {
   componentWillMount () {
     Auth.deauthenticateUser()
     Auth.removeUser()
@@ -13,13 +12,3 @@ class Logout extends React.Component {
     return <div>Logout</div>
   }
 }
-
-const mapStateToProps = (state) => {
-  return {
-    data: state
-  }
-}
-
-export default connect(mapStateToProps)(Logout)
-
-
