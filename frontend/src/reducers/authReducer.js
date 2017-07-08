@@ -1,35 +1,60 @@
-import { REGISTER_REQUEST, CHANGE_REGISTER_FORM, REGISTRATION_ERROR, REGISTRATION_SUCCESS } from '../actions/actionTypes'
+import {
+  LOADING,
+  CHANGE_REGISTER_FORM,
+  CHANGE_LOGIN_FORM,
+  REGISTER_ERROR,
+  REGISTER_SUCCESS,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR
+} from '../actions/actionTypes'
 import Auth from '../utilities/Auth'
 
 const initialState = { //TODO: Add all auth related state here
-  formState: {
+  registerForm: {
     email: '',
     password: '',
     confirmPassword: '',
     name: ''
   },
-  isRegisterSuccessful: Auth.isUserAuthenticated(),
-  currentlySending: false,
-  errorMessage: ''
+  registerError: '',
+  loginForm: {
+    email: '',
+    password: ''
+  },
+  loginError: '',
+  isLoggedIn: Auth.isUserAuthenticated(),
+  loading: false,
 }
 
 export default function authReducer (state = initialState, action) {
   switch (action.type) {
-    case REGISTER_REQUEST:
+    case LOADING:
       return Object.assign({}, state, {
-        currentlySending: action.newState
+        loading: action.newState
       })
     case CHANGE_REGISTER_FORM:
       return Object.assign({}, state, {
-        formState: action.newState
+        registerForm: action.newState
       })
-    case REGISTRATION_ERROR:
+    case REGISTER_ERROR:
       return Object.assign({}, state, {
-        errorMessage: action.errorMessage
+        registerError: action.errorMessage
       })
-    case REGISTRATION_SUCCESS:
+    case REGISTER_SUCCESS:
       return Object.assign({}, state, {
         isRegisterSuccessful: true
+      })
+    case CHANGE_LOGIN_FORM:
+      return Object.assign({}, state, {
+        loginForm: action.newState
+      })
+    case LOGIN_ERROR:
+      return Object.assign({}, state, {
+        loginError: action.errorMessage
+      })
+    case LOGIN_SUCCESS:
+      return Object.assign({}, state, {
+        isLoggedIn: true
       })
     default:
       return state

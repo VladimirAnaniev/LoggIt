@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { register, changeRegisterForm } from '../../../actions/authActions'
+import { register, changeRegisterForm} from '../../../actions/authActions'
 import RegisterForm from './RegisterForm'
 
 class Register extends Component {
-  componentWillReceiveProps = (newProps) => {
-    if(newProps.isRegisterSuccessful && !this.props.isRegisterSuccessful) {
-      console.log("REGISTER SUCCESS!")
-      //TODO: Login
-    }
-  }
-
   handleFormSubmit = (event) => {
     event.preventDefault()
     this.props.dispatch(register(this.props.formState))
@@ -27,9 +20,10 @@ class Register extends Component {
 
 
   render () {
-    const {formState, error} = this.props
+    const { formState, loading, error} = this.props
     return ( //TODO: handle request loading
       <div>
+        {loading && <div>loading</div> /*TODO*/}
         <RegisterForm
           user={formState}
           error={error}
@@ -42,7 +36,9 @@ class Register extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.authReducer
+    formState: state.authReducer.registerForm,
+    error: state.authReducer.registerError,
+    loading: state.authReducer.loading
   }
 }
 
