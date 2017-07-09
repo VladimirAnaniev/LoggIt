@@ -1,28 +1,12 @@
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const passport = require('passport')
-const localSignupStrategy = require('./passport/local-signup')
-const localLoginStrategy = require('./passport/local-login')
-const authRoutes = require('./routes/auth')
-const petsRoutes = require('./routes/pets')
+const app = require('express')()
 
-const app = express()
+let env = process.env.NODE_ENV || 'development'
+const settings = require('./config/settings')[env]
 
-const port = 5000
+require('./config/express')(app)
+require('./config/routes')(app)
+require('./config/database')(settings)
 
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(passport.initialize())
-app.use(cors())
-
-passport.use('local-signup', localSignupStrategy)
-passport.use('local-login', localLoginStrategy)
-
-// routes
-app.use('/auth', authRoutes)
-app.use('/pets', petsRoutes)
-
-app.listen(port, () => {
-  console.log(`Server running on port ${port}...`)
+app.listen(settings.port, () => {
+  console.log(`Server running on port ${settings.port}...`)
 })

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const usersData = require('../data/users')
+const usersData = require('../../data/User')
 
 module.exports = (req, res, next) => {
   if (!req.headers.authorization) {
