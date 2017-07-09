@@ -39,9 +39,10 @@ class Login extends Component {
   }
 
   render () {
-    const {formState, loading, error} = this.props
+    const {isLoggedIn, formState, loading, error} = this.props
     return ( //TODO: handle request loading
       <div>
+        {isLoggedIn && this.props.history.push('/')}
         {loading && <div>loading</div> /*TODO*/}
         <LoginFrom
           user={formState}
@@ -57,7 +58,8 @@ const mapStateToProps = (state) => {
   return {
     formState: state.authReducer.loginForm,
     loading: state.authReducer.loading,
-    error: state.authReducer.loginError
+    error: state.authReducer.loginError,
+    isLoggedIn: state.authReducer.isLoggedIn
   }
 }
 

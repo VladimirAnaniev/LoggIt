@@ -14,7 +14,8 @@ class Register extends Component {
     }),
     loading: PropTypes.bool,
     error: PropTypes.string,
-    dispatch: PropTypes.func
+    dispatch: PropTypes.func,
+    isLoggedIn: PropTypes.bool
   }
 
   static defaultProps = {
@@ -25,7 +26,8 @@ class Register extends Component {
       name: ''
     },
     loading: false,
-    error: ''
+    error: '',
+    isLoggedIn: false
   }
 
   handleFormSubmit = (event) => {
@@ -44,9 +46,10 @@ class Register extends Component {
 
 
   render () {
-    const { formState, loading, error} = this.props
+    const {isLoggedIn, formState, loading, error} = this.props
     return ( //TODO: handle request loading
       <div>
+        {isLoggedIn && this.props.history.push('/')}
         {loading && <div>loading</div> /*TODO*/}
         <RegisterForm
           user={formState}
@@ -62,7 +65,8 @@ const mapStateToProps = (state) => {
   return {
     formState: state.authReducer.registerForm,
     error: state.authReducer.registerError,
-    loading: state.authReducer.loading
+    loading: state.authReducer.loading,
+    isLoggedIn: state.authReducer.isLoggedIn
   }
 }
 

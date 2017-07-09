@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Auth from '../../utilities/Auth'
 import styled from 'styled-components'
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 const Nav = styled.ul`
   list-style-type: none;
@@ -23,14 +24,13 @@ const NavItem = styled.li`
   }
 }
 `
-
-export default function NavBar () {
+function NavBar ({isLoggedIn = false}) {
   return (
     <Nav>
       <NavItem><Link to='/'>Home</Link></NavItem>
 
-      {Auth.isUserAuthenticated() ? (
-        <div className="inline-block">
+      {isLoggedIn ? (
+        <div>
 
         </div>
       ) : (
@@ -41,5 +41,16 @@ export default function NavBar () {
       )}
     </Nav>
   )
-
 }
+
+NavBar.propTypes = {
+  isLoggedIn: PropTypes.bool
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLoggedIn: state.authReducer.isLoggedIn
+  }
+}
+
+export default connect(mapStateToProps)(NavBar)
