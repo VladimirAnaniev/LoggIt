@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LoginFrom from './LoginForm'
 import PropTypes from 'prop-types'
-import {changeLoginForm, login} from '../../../actions/authActions'
+import { changeLoginForm, login } from '../../../actions/authActions'
+import { Row, Col, CardPanel } from 'react-materialize'
 
 class Login extends Component {
   static propTypes = {
@@ -40,13 +41,17 @@ class Login extends Component {
 
   render () {
     const {formState} = this.props
-    return ( //TODO: handle request loading
-      <div>
-        <LoginFrom
-          user={formState}
-          onChange={this.handleFormDataChange}
-          onSubmit={this.handleFormSubmit}/>
-      </div>
+    return (
+      <Row>
+        <Col s={12} m={6} offset='m3'>
+          <CardPanel>
+            <LoginFrom
+              user={formState}
+              onChange={this.handleFormDataChange}
+              onSubmit={this.handleFormSubmit} />
+          </CardPanel>
+        </Col>
+      </Row>
     )
   }
 }

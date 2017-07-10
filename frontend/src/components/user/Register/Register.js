@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { register, changeRegisterForm } from '../../../actions/authActions'
 import RegisterForm from './RegisterForm'
 import PropTypes from 'prop-types'
+import { Row, Col, CardPanel } from 'react-materialize'
 
 class Register extends Component {
   static propTypes = {
@@ -40,12 +41,16 @@ class Register extends Component {
   render () {
     const {formState} = this.props
     return (
-      <div>
-        <RegisterForm
-          user={formState}
-          onChange={this.handleFormDataChange}
-          onSubmit={this.handleFormSubmit} />
-      </div>
+      <Row>
+        <Col s={12} m={6} offset='m3'>
+          <CardPanel>
+            <RegisterForm
+              user={formState}
+              onChange={this.handleFormDataChange}
+              onSubmit={this.handleFormSubmit} />
+          </CardPanel>
+        </Col>
+      </Row>
     )
   }
 }
