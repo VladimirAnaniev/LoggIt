@@ -2,14 +2,13 @@ const mongoose = require('mongoose')
 const encryption = require('../utilities/encryption')
 
 const REQUIRED = '{PATH} is required!'
-// const ObjectId = mongoose.Schema.Types.ObjectId
 
 let userSchema = new mongoose.Schema({
   email: { type: String, required: REQUIRED, unique: true },
   password: { type: String, required: REQUIRED },
   salt: String,
   name: { type: String, required: REQUIRED },
-  roles: [{type: String}]
+  roles: [String]
 })
 
 userSchema.method({

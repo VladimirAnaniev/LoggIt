@@ -7,3 +7,9 @@ export const CHANGE_LOGIN_STATE = 'CHANGE_LOGIN_STATE'
 export const LOADING = 'LOADING'
 export const ERROR = 'ERROR'
 export const SUCCESS = 'SUCCESS'
+
+// Workouts
+export const LOAD_WROKOUTS = 'LOAD_WORKOUTS'
+export const CHANGE_PAGE = 'CHANGE_PAGE'
+export const LOAD_WORKOUT_DETAILS = 'LOAD_DETAIL'
+export const SET_WORKOUT_PAGES_COUNT = 'SET_WORKOUT_PAGES_COUNT'
