@@ -1,41 +1,49 @@
 import {
-  LOADING,
   CHANGE_REGISTER_FORM,
   CHANGE_LOGIN_FORM,
-  LOGIN_ERROR,
-  REGISTER_ERROR,
-  REGISTER_SUCCESS,
-  LOGIN_SUCCESS} from './actionTypes'
+  CHANGE_LOGIN_STATE} from './actionTypes'
 import REST from '../utilities/rest'
 import Auth from '../utilities/Auth'
+import Validator from '../utilities/Validator'
+import {loading, error, success} from './feedbackActions'
 
 export function register (user) {
   return (dispatch) => {
     dispatch(loading(true))
 
-    let validation = validateRegistration(user)
+    let validation = Validator.validateRegistration(user)
     if (!validation.isValid) {
-      dispatch(registerError(validation.message))
-      dispatch(loading(false))
+      dispatch(registerFail(validation.message))
       return
     }
 
     REST.post('auth/register', user)
       .then(result => {
         if(!result.success) {
-          dispatch(registerError(result.message))
-          dispatch(loading(false))
+          dispatch(registerFail(result.message))
           return
         }
 
-        dispatch(registerSuccess())
-        dispatch(loading(false))
-        dispatch(login({email: user.email, password: user.password}))
+        dispatch(registerSuccess(user))
       })
       .catch(err => {
-        dispatch(registerError(err))
-        dispatch(loading(false))
+        dispatch(registerFail(err))
       })
+  }
+}
+
+function registerFail (message) {
+  return (dispatch) => {
+    dispatch(error(message))
+    dispatch(loading(false))
+  }
+}
+
+function registerSuccess (user) {
+  return (dispatch) => {
+    dispatch(success('Registration successful.'))
+    dispatch(loading(false))
+    dispatch(login({email: user.email, password: user.password}))
   }
 }
 
@@ -43,10 +51,9 @@ export function login (user) {
   return (dispatch) => {
     dispatch(loading(true))
 
-    let validation = validateLogin(user)
+    let validation = Validator.validateLogin(user)
     if (!validation.isValid) {
       dispatch(loginError(validation.message))
-      dispatch(loading(false))
       return
     }
 
@@ -54,78 +61,50 @@ export function login (user) {
       .then(result => {
         if(!result.success) {
           dispatch(loginError(result.message))
-          dispatch(loading(false))
           return
         }
 
-        dispatch(loginSuccess())
-        dispatch(loading(false))
-        Auth.authenticateUser(result.token)
-        Auth.saveUser(result.user)
+        dispatch(loginSuccess(result.token, result.user))
       })
       .catch(err => {
         dispatch(loginError(err))
-        dispatch(loading(false))
       })
   }
 }
 
-function validateLogin (user) {
-  if (!user || user.email.trim().length === 0) {
-    return {isValid: false, message: 'Please provide your email address.'}
+function loginSuccess (token, user) {
+  return (dispatch) => {
+    dispatch(success('Login successful.'))
+    dispatch(changeLoginState(true))
+    dispatch(loading(false))
+    Auth.authenticateUser(token)
+    Auth.saveUser(user)
   }
-
-  if (!user || user.password.trim().length === 0) {
-    return {isValid: false, message: 'Please provide your password.'}
-  }
-
-  return {isValid:true}
 }
 
-function validateRegistration (user) {
-  if (!user || !user.email) { //TODO: check regex
-    return {isValid: false, message: 'Please provide a correct email address.'}
+function loginError (message) {
+  return (dispatch) => {
+    dispatch(error(message))
+    dispatch(loading(false))
   }
-
-  if (!user || user.password.trim().length < 4) {
-    return {isValid: false, message: 'Password must have at least 4 characters.'}
-  }
-
-  if (!user || user.password !== user.confirmPassword) {
-    return {isValid: false, message: 'Passwords must match.'}
-  }
-
-  if (!user || user.name.trim().length === 0) {
-    return {isValid: false, message: 'Please provide your name.'}
-  }
-
-  return {isValid: true}
-}
-
-function loading (newState) {
-  return {type: LOADING, newState}
 }
 
 export function changeRegisterForm (newState) {
   return {type: CHANGE_REGISTER_FORM, newState}
 }
 
-export function registerError (errorMessage) {
-  return {type: REGISTER_ERROR, errorMessage}
-}
-
-export function registerSuccess () {
-  return {type: REGISTER_SUCCESS}
-}
-
 export function changeLoginForm (newState) {
   return {type: CHANGE_LOGIN_FORM, newState}
 }
 
-export function loginError (errorMessage) {
-  return {type: LOGIN_ERROR, errorMessage}
+export function changeLoginState (newState) {
+  return {type: CHANGE_LOGIN_STATE, newState}
 }
 
-export function loginSuccess () {
-  return {type: LOGIN_SUCCESS}
+export function logout() {
+  return (dispatch) => {
+    Auth.deauthenticateUser()
+    dispatch(success('Logout successful.'))
+    dispatch(changeLoginState(false))
+  }
 }

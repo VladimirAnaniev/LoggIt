@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
-import Auth from '../../utilities/Auth'
+import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
+import {logout} from '../../actions/authActions'
 
-export default class Logout extends Component {
+class Logout extends Component {
   componentWillMount () {
-    Auth.deauthenticateUser()
-    Auth.removeUser()
-    this.props.history.push('/')
+    this.props.dispatch(logout())
   }
 
   render () {
-    return <div>Logout</div>
+    return <Redirect to={{
+      pathname: '/',
+      state: {from: this.props.location}
+    }}/>
   }
 }
+
+export default connect()(Logout)

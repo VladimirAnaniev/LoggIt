@@ -13,7 +13,7 @@ export default function Routes () {
       <Route path='/' exact component={Home} />
       <UnauthorizedOnlyRoute path='/user/login' component={Login} />
       <UnauthorizedOnlyRoute path='/user/register' component={Register} />
-      <PrivateRoute path='/users/logout' component={Logout} />
+      <PrivateRoute path='/user/logout' component={Logout} />
     </Switch>
   )
 }

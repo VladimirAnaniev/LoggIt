@@ -31,7 +31,7 @@ function NavBar ({isLoggedIn = false}) {
 
       {isLoggedIn ? (
         <div>
-
+          <NavItem><Link to="/user/logout">Logout</Link></NavItem>
         </div>
       ) : (
         <div>
@@ -49,7 +49,7 @@ NavBar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.authReducer.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn
   }
 }
 

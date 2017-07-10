@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
 
-import authReducer from './authReducer'
+import auth from './authReducer'
+import feedback from './feedbackReducer'
 
-const reducers = combineReducers({authReducer})
+const reducers = combineReducers({auth, feedback})
 
 export default reducers
 

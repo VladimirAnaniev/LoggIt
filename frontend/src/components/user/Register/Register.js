@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { register, changeRegisterForm} from '../../../actions/authActions'
+import { register, changeRegisterForm } from '../../../actions/authActions'
 import RegisterForm from './RegisterForm'
 import PropTypes from 'prop-types'
 
@@ -11,11 +11,7 @@ class Register extends Component {
       password: PropTypes.string,
       confirmPassword: PropTypes.string,
       name: PropTypes.string
-    }),
-    loading: PropTypes.bool,
-    error: PropTypes.string,
-    dispatch: PropTypes.func,
-    isLoggedIn: PropTypes.bool
+    })
   }
 
   static defaultProps = {
@@ -25,9 +21,6 @@ class Register extends Component {
       confirmPassword: '',
       name: ''
     },
-    loading: false,
-    error: '',
-    isLoggedIn: false
   }
 
   handleFormSubmit = (event) => {
@@ -44,18 +37,14 @@ class Register extends Component {
     this.props.dispatch(changeRegisterForm(newState))
   }
 
-
   render () {
-    const {isLoggedIn, formState, loading, error} = this.props
-    return ( //TODO: handle request loading
+    const {formState} = this.props
+    return (
       <div>
-        {isLoggedIn && this.props.history.push('/')}
-        {loading && <div>loading</div> /*TODO*/}
         <RegisterForm
           user={formState}
-          error={error}
           onChange={this.handleFormDataChange}
-          onSubmit={this.handleFormSubmit}/>
+          onSubmit={this.handleFormSubmit} />
       </div>
     )
   }
@@ -63,10 +52,7 @@ class Register extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    formState: state.authReducer.registerForm,
-    error: state.authReducer.registerError,
-    loading: state.authReducer.loading,
-    isLoggedIn: state.authReducer.isLoggedIn
+    formState: state.auth.registerForm,
   }
 }
 
