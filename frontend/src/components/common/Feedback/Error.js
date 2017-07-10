@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 const ErrorMessage = styled.div`
   color: red;
+  text-align: center;
 `
 
 Error.propTypes = {

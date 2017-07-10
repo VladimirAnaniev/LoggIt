@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 class Workouts extends Component {
-  static propTypes = {
-
-  }
+  static propTypes = {}
 
   render () {
     return <div>WORKOUTS</div>
@@ -13,9 +11,7 @@ class Workouts extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-
-  }
+  return {}
 }
 
 export default connect(mapStateToProps)(Workouts)

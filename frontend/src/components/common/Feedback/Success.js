@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 const SuccessMessage = styled.div`
   color: green;
+  text-align: center;
 `
 
 Success.propTypes = {

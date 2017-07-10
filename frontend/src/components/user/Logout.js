@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import {logout} from '../../actions/authActions'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
+import { logout } from '../../actions/authActions'
 
 class Logout extends Component {
   componentWillMount () {
@@ -12,7 +12,7 @@ class Logout extends Component {
     return <Redirect to={{
       pathname: '/',
       state: {from: this.props.location}
-    }}/>
+    }} />
   }
 }
 

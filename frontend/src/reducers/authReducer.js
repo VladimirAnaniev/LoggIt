@@ -14,8 +14,8 @@ const initialState = {
     name: ''
   },
   loginForm: {
-    email: '',
-    password: ''
+    email: 'admin@admin.com',
+    password: 'Admin'
   },
   isLoggedIn: Auth.isUserAuthenticated()
 }
