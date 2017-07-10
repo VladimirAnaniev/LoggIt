@@ -13,7 +13,7 @@ const Nav = styled.ul`
 `
 
 const NavItem = styled.li`
-  float: left;
+  float: ${props => props.float || 'left'};
 
   a {
     display: block;
@@ -31,12 +31,14 @@ function NavBar ({isLoggedIn = false}) {
 
       {isLoggedIn ? (
         <div>
-          <NavItem><Link to="/user/logout">Logout</Link></NavItem>
+          <NavItem><Link to="/workouts">Workouts</Link></NavItem>
+          <NavItem float="right"><Link to="/logout">Logout</Link></NavItem>
+          <NavItem float="right"><Link to="/profile">Profile</Link></NavItem>
         </div>
       ) : (
         <div>
-          <NavItem><Link to='/user/register'>Register</Link></NavItem>
-          <NavItem><Link to='/user/login'>Login</Link></NavItem>
+          <NavItem><Link to='/register'>Register</Link></NavItem>
+          <NavItem><Link to='/login'>Login</Link></NavItem>
         </div>
       )}
     </Nav>

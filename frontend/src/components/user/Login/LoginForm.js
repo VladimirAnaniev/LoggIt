@@ -14,27 +14,22 @@ Input.propTypes = {
   onSubmit: PropTypes.func
 }
 
-export default function LoginForm ({user, error, onChange, onSubmit}) {
+export default function LoginForm ({user, onChange, onSubmit}) {
   return (
-    <div className='container'>
-      <StyledForm>
-        <div className='error'>{error}</div>
-        <Input
-          type='email'
-          name='email'
-          value={user.email}
-          placeholder='E-mail'
-          onChange={onChange} />
-        <br />
-        <Input
-          type='password'
-          name='password'
-          value={user.password}
-          placeholder='Password'
-          onChange={onChange} />
-        <StyledButton type='submit' value='Login' onClick={onSubmit} />
-        <br />
-      </StyledForm>
-    </div>
+    <StyledForm>
+      <Input
+        type='email'
+        name='email'
+        value={user.email}
+        placeholder='E-mail'
+        onChange={onChange} />
+      <Input
+        type='password'
+        name='password'
+        value={user.password}
+        placeholder='Password'
+        onChange={onChange} />
+      <StyledButton type='submit' value='Login' onClick={onSubmit} />
+    </StyledForm>
   )
 }

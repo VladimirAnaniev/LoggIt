@@ -17,7 +17,7 @@ const initialState = {
     email: '',
     password: ''
   },
-  isLoggedIn: Auth.isUserAuthenticated(),
+  isLoggedIn: Auth.isUserAuthenticated()
 }
 
 export default function authReducer (state = initialState, action) {

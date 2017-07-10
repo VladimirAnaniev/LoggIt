@@ -16,39 +16,33 @@ Input.propTypes = {
   onSubmit: PropTypes.func
 }
 
-export default function RegisterForm ({user, error, onChange, onSubmit}) {
+export default function RegisterForm ({user, onChange, onSubmit}) {
   return (
-    <div className='container'>
-      <StyledForm>
-        <div className='error'>{error}</div>
-        <Input
-          type='email'
-          name='email'
-          value={user.email}
-          placeholder='E-mail'
-          onChange={onChange} />
-        <br />
-        <Input
-          type='password'
-          name='password'
-          value={user.password}
-          placeholder='Password'
-          onChange={onChange} />
-        <br />
-        <Input
-          type='password'
-          name='confirmPassword'
-          value={user.confirmPassword}
-          placeholder='Confirm-Password'
-          onChange={onChange} />
-        <br />
-        <Input
-          name='name'
-          value={user.name}
-          placeholder='Name'
-          onChange={onChange} />
-        <StyledButton type='submit' value='Register' onClick={onSubmit} />
-      </StyledForm>
-    </div>
+    <StyledForm>
+      <Input
+        type='email'
+        name='email'
+        value={user.email}
+        placeholder='E-mail'
+        onChange={onChange} />
+      <Input
+        type='password'
+        name='password'
+        value={user.password}
+        placeholder='Password'
+        onChange={onChange} />
+      <Input
+        type='password'
+        name='confirmPassword'
+        value={user.confirmPassword}
+        placeholder='Confirm-Password'
+        onChange={onChange} />
+      <Input
+        name='name'
+        value={user.name}
+        placeholder='Name'
+        onChange={onChange} />
+      <StyledButton type='submit' value='Register' onClick={onSubmit} />
+    </StyledForm>
   )
 }
