@@ -13,7 +13,9 @@ const initialState = {
   pages: 1,
   workouts: [],
   details: {
-    //TODO
+    name: '',
+    date: new Date().toLocaleDateString(),
+    exercises: []
   },
   formState: {
     name: '',

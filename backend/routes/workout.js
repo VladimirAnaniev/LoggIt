@@ -16,11 +16,16 @@ router.get('/list', authCheck, (req, res) => {
     .skip((page - 1) * pageSize)
     .limit(pageSize)
     .then(workouts => {
-      res.json(workouts)
+      res.json({
+        success: true,
+        workouts
+      })
     })
     .catch(err => {
-      console.log(err)
-      res.json(err)
+      res.json({
+        success: false,
+        message: err.message
+      })
     })
 })
 
@@ -31,11 +36,16 @@ router.get('/count', authCheck, (req, res) => {
     .find({user: user})
     .count()
     .then(count => {
-      res.json(count)
+      res.json({
+        success: true,
+        count
+      })
     })
     .catch(err => {
-      console.log(err)
-      res.json(err)
+      res.json({
+        success: false,
+        message: err.message
+      })
     })
 })
 
@@ -65,7 +75,11 @@ router.post('/create', authCheck, (req, res) => {
 
     Workout.create({name: workout.name, user, exercises: exerciseIds})
       .then(workout => {
-        return res.json({success: true, message: 'Workout created successfully', workout})
+        return res.json({
+          success: true,
+          message: 'Workout created successfully',
+          workout
+        })
       })
       .catch(err => {
         return res.status(200).json({
@@ -75,5 +89,41 @@ router.post('/create', authCheck, (req, res) => {
       })
   })
 })
+
+router.get('/:id', authCheck, (req, res) => {
+  const id = req.params.id
+
+  Workout
+    .findById(id)
+    .populate('exercises')
+    .then(workout => {
+      if (!workout) {
+        return res.json({
+          success: false,
+          message: 'No such workout exists.'
+        })
+      }
+
+      if (workout.user.equals(req.user)) {
+        return res.json({
+          success: false,
+          message: 'You have no access to this workout'
+        })
+      }
+
+      res.json({
+        success: true,
+        workout
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        message: 'Invalid workout id'
+      })
+    })
+})
+
+
 
 module.exports = router

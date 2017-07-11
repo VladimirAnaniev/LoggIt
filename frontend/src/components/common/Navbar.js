@@ -1,25 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Navbar, NavItem } from 'react-materialize'
+import { Navbar } from 'react-materialize'
 
 function NavBar ({isLoggedIn = false}) {
   if (isLoggedIn) {
     return (
       <Navbar className='blue-grey darken-4' brand="LoggIt" right>
-        <NavItem><Link to='/'>Home</Link></NavItem>
-        <NavItem><Link to="/workouts">Workouts</Link></NavItem>
-        <NavItem><Link to="/profile">Profile</Link></NavItem>
-        <NavItem><Link to="/logout">Logout</Link></NavItem>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to="/workouts">Workouts</NavLink></li>
+        <li><NavLink to="/profile">Profile</NavLink></li>
+        <li><NavLink to="/logout">Logout</NavLink></li>
       </Navbar>
     )
   } else {
     return (
       <Navbar className='blue-grey darken-4' brand="LoggIt" right>
-        <NavItem><Link to='/'>Home</Link></NavItem>
-        <NavItem><Link to='/register'>Register</Link></NavItem>
-        <NavItem><Link to='/login'>Login</Link></NavItem>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/register'>Register</NavLink></li>
+        <li><NavLink to='/login'>Login</NavLink></li>
       </Navbar>
     )
   }

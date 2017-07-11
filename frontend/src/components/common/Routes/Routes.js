@@ -10,6 +10,7 @@ import Profile from '../../user/Profile'
 import NotFound from '../../home/NotFound'
 import Workouts from '../../workouts/Workouts'
 import CreateWorkout from '../../workouts/create/CreateWorkout'
+import WorkoutDetails from '../../workouts/details/WorkoutDetails'
 
 export default function Routes () {
   return (
@@ -21,6 +22,7 @@ export default function Routes () {
       <PrivateRoute path='/logout' component={Logout} />
       <PrivateRoute path='/workouts' component={Workouts} />
       <PrivateRoute path='/workout/create' component={CreateWorkout} />
+      <PrivateRoute path='/workout/:id' component={WorkoutDetails} />
       <Route component={NotFound} />
     </Switch>
   )

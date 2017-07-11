@@ -15,13 +15,16 @@ export function fetchWorkouts (page = 1) {
     dispatch(loading(true))
 
     REST.get(`workout/list?page=${page}`, true)
-      .then(workouts => {
-        dispatch(loadWorkouts(workouts))
-        dispatch(loading(false))
+      .then(result => {
+        if (result.success) {
+          dispatch(loadWorkouts(result.workouts))
+          dispatch(loading(false))
+        } else {
+          dispatch(fetchError(result.message))
+        }
       })
       .catch(err => {
-        dispatch(error(err))
-        dispatch(loading(false))
+        dispatch(fetchError(err.message))
       })
   }
 }
@@ -31,13 +34,16 @@ export function getPagesCount () {
     dispatch(loading(true))
 
     REST.get('workout/count', true)
-      .then(count => {
-        dispatch(setPagesCount(count))
-        dispatch(loading(false))
+      .then(result => {
+        if (result.success) {
+          dispatch(setPagesCount(result.count))
+          dispatch(loading(false))
+        } else {
+          dispatch(fetchError(result.message))
+        }
       })
       .catch(err => {
-        dispatch(error(err))
-        dispatch(loading(false))
+        dispatch(fetchError(err.message))
       })
   }
 }
@@ -49,18 +55,15 @@ export function createWorkout (workout) {
     REST.post('workout/create', workout, true)
       .then(result => {
         if(!result.success) {
-          dispatch(error(result.message))
-          dispatch(loading(false))
+          dispatch(fetchError(result.message))
         } else {
           dispatch(workoutCreated)
-          dispatch(success(result.message))
-          dispatch(loading(false))
+          dispatch(fetchSuccess(result.message))
           dispatch(resetCreateWorkoutForm)
         }
       })
       .catch(err => {
-        dispatch(error(err.message))
-        dispatch(loading(false))
+        dispatch(fetchError(err.message))
       })
   }
 }
@@ -91,3 +94,36 @@ export function changeCreateFormState (newState) {
 }
 
 const resetCreateWorkoutForm = {type: RESET_CREATE_WORKOUT_FORM}
+
+export function fetchWorkoutDetails (id) {
+  return (dispatch) => {
+    dispatch(loading(true))
+
+    REST.get(`workout/${id}`, true)
+      .then(result => {
+        if(!result.success) {
+          dispatch(fetchError(result.message))
+        } else {
+          dispatch(loadWorkoutDetails(result.workout))
+          dispatch(loading(false))
+        }
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message))
+      })
+  }
+}
+
+function fetchError (message) {
+  return (dispatch) => {
+    dispatch(error(message))
+    dispatch(loading(false))
+  }
+}
+
+function fetchSuccess (message) {
+  return (dispatch) => {
+    dispatch(success(message))
+    dispatch(loading(false))
+  }
+}
