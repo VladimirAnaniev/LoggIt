@@ -18,8 +18,11 @@ module.exports = (req, res, next) => {
 
     User.findById(userId)
       .then(user => {
-        if (!user) {
-          return res.status(401).end()
+        if (!user || user.isBlocked) {
+          return res.json({
+            success: false,
+            message: 'Unauthorized.'
+          })
         }
 
         req.user = user

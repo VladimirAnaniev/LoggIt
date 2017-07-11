@@ -3,7 +3,8 @@ import {
   CHANGE_REGISTER_FORM,
   CHANGE_LOGIN_FORM,
   CHANGE_LOGIN_STATE,
-  RESET_AUTH_FORMS
+  RESET_AUTH_FORMS,
+  SET_ADMIN_STATUS
 } from '../actions/actionTypes'
 import Auth from '../utilities/Auth'
 
@@ -18,7 +19,8 @@ const initialState = {
     email: 'admin@admin.com',
     password: 'Admin'
   },
-  isLoggedIn: Auth.isUserAuthenticated()
+  isLoggedIn: Auth.isUserAuthenticated(),
+  isAdmin: Auth.isAdmin()
 }
 
 export default function authReducer (state = initialState, action) {
@@ -51,6 +53,10 @@ export default function authReducer (state = initialState, action) {
           email: '',
           password: ''
         }
+      })
+    case SET_ADMIN_STATUS:
+      return Object.assign({}, state, {
+        isAdmin: action.newState
       })
     default:
       return state

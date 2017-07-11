@@ -14,7 +14,7 @@ class Home extends Component {
   render () {
     const { usersCount, workoutsCount, isLoggedIn } = this.props
     return (
-      <CardPanel className='center blue lighten-3'>
+      <CardPanel className='center'>
         <h1>Welcome to LoggIt</h1>
         <h3>A place to store your workout journals and track your progress in the gym</h3>
         <p>Our {usersCount} users have completed {workoutsCount} workouts.</p>

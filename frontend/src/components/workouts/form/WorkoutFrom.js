@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Row, Input, Button } from 'react-materialize'
 import ExerciseForm from './ExerciseForm'
 import { connect } from 'react-redux'
-import { changeWorkoutFormState } from '../../../actions/workoutsActions'
+import { changeWorkoutFormState, resetWorkoutForm } from '../../../actions/workoutsActions'
+import { Link } from 'react-router-dom'
 
 class WorkoutForm extends Component {
   static propTypes = {
@@ -55,6 +56,10 @@ class WorkoutForm extends Component {
     this.props.dispatch(changeWorkoutFormState(newExercises))
   }
 
+  cancel = () => {
+    this.props.dispatch(resetWorkoutForm)
+  }
+
   render () {
     const {formState, onChange, onSubmit} = this.props
     const {name, exercises} = formState
@@ -78,6 +83,7 @@ class WorkoutForm extends Component {
         ))}
         <Button waves='light' onClick={this.handleExerciseAddition}>Add exercise</Button>
         <Button className='green' waves='light' onClick={onSubmit}>Create</Button>
+        <Link to="/workouts" className='btn' waves='light' onClick={this.cancel}>Cancel</Link>
       </Row>
     )
   }

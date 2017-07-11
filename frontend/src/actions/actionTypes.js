@@ -1,10 +1,11 @@
-//Auth
+// Auth
 export const CHANGE_REGISTER_FORM = 'CHANGE_REGISTER_FORM'
 export const CHANGE_LOGIN_FORM = 'CHANGE_LOGIN_FORM'
 export const CHANGE_LOGIN_STATE = 'CHANGE_LOGIN_STATE'
 export const RESET_AUTH_FORMS = 'RESET_AUTH_FORMS'
+export const SET_ADMIN_STATUS = 'SET_ADMIN_STATUS'
 
-//Feedback
+// Feedback
 export const LOADING = 'LOADING'
 export const ERROR = 'ERROR'
 export const SUCCESS = 'SUCCESS'
@@ -22,3 +23,6 @@ export const CHANGE_WORKOUTS_COUNT = 'CHANGE_WORKOUTS_COUNT'
 // Users
 export const LOAD_PROFILE_DATA = 'LOAD_PROFILE_DATA'
 export const CHANGE_USERS_COUNT = 'CHANGE_USERS_COUNT'
+
+// Admin
+export const LOAD_ALL_USERS = 'LOAD_ALL_USERS'

@@ -13,8 +13,10 @@ router.get('/list', authCheck, (req, res) => {
 
   Workout
     .find({user: user})
+    .sort('-date')
     .skip((page - 1) * pageSize)
     .limit(pageSize)
+    .populate('exercises')
     .then(workouts => {
       res.json({
         success: true,

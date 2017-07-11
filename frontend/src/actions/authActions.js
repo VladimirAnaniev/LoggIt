@@ -2,7 +2,8 @@ import {
   CHANGE_REGISTER_FORM,
   CHANGE_LOGIN_FORM,
   CHANGE_LOGIN_STATE,
-  RESET_AUTH_FORMS
+  RESET_AUTH_FORMS,
+  SET_ADMIN_STATUS
 } from './actionTypes'
 import REST from '../utilities/rest'
 import Auth from '../utilities/Auth'
@@ -70,7 +71,7 @@ export function login (user) {
         dispatch(loginSuccess(result.token, result.user))
       })
       .catch(err => {
-        dispatch(loginError(err))
+        dispatch(loginError(err.message))
       })
   }
 }
@@ -83,6 +84,10 @@ function loginSuccess (token, user) {
     Auth.authenticateUser(token)
     Auth.saveUser(user)
     dispatch(resetAuthForms)
+
+    if(user.roles.indexOf('Admin') >= 0) {
+      dispatch(setAdminStatus(true))
+    }
   }
 }
 
@@ -111,7 +116,12 @@ export function logout() {
     Auth.removeUser()
     dispatch(success('Logout successful.'))
     dispatch(changeLoginState(false))
+    dispatch(setAdminStatus(false))
   }
 }
 
 const resetAuthForms = {type: RESET_AUTH_FORMS}
+
+function setAdminStatus (newState) {
+  return {type:SET_ADMIN_STATUS, newState}
+}

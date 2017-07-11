@@ -5,7 +5,13 @@ import {
 } from './actionTypes'
 
 export function error (message) {
-  return {type: ERROR, message}
+  return (dispatch) => {
+    dispatch({type: ERROR, message})
+
+    setTimeout(() => {
+      dispatch(clearError())
+    }, 2000)
+  }
 }
 
 export function clearError () {
@@ -13,7 +19,13 @@ export function clearError () {
 }
 
 export function success (message) {
-  return {type: SUCCESS, message}
+  return (dispatch) => {
+    dispatch({type: SUCCESS, message})
+
+    setTimeout(() => {
+      dispatch(clearSuccess())
+    }, 2000)
+  }
 }
 
 export function clearSuccess () {

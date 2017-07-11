@@ -8,15 +8,13 @@ let userSchema = new mongoose.Schema({
   password: { type: String, required: REQUIRED },
   salt: String,
   name: { type: String, required: REQUIRED },
-  roles: [String]
+  roles: [String],
+  isBlocked: {type: Boolean, default: false}
 })
 
 userSchema.method({
   authenticate: function (password) {
     return encryption.generateHashedPassword(this.salt, password) === this.hashedPass
-  },
-  isAdmin: () => {
-    return this.roles.indexOf('Admin') >= 0
   }
 })
 

@@ -25,4 +25,7 @@ export default class Auth {
   static getToken () {
     return window.localStorage.getItem('token')
   }
+  static isAdmin () {
+    return this.isUserAuthenticated() && this.getUser().roles.indexOf('Admin') >= 0
+  }
 }

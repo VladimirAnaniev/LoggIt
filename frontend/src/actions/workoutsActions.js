@@ -95,7 +95,7 @@ export function changeWorkoutFormState (newState) {
   return {type: CHANGE_WORKOUT_FORM, newState}
 }
 
-const resetWorkoutForm = {type: RESET_WORKOUT_FORM}
+export const resetWorkoutForm = {type: RESET_WORKOUT_FORM}
 
 export function fetchWorkoutDetails (id) {
   return (dispatch) => {

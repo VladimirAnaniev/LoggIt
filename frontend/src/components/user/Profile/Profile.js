@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchProfile } from '../../actions/userActions'
+import { fetchProfile } from '../../../actions/userActions'
 import PropTypes from 'prop-types'
 import { CardPanel } from 'react-materialize'
 import { Link } from 'react-router-dom'
@@ -26,8 +26,7 @@ class Profile extends Component {
         <p>Email: {profile.email}</p>
         <p>Name: {profile.name}</p>
         <p>Roles: {profile.roles.map((r, k) => <span key={k}>{r}</span>)}</p>
-        <Link to="profile/edit">Edit your profile</Link>
-        {}
+        {/*<Link to="profile/edit">Edit your profile</Link>*/}
       </CardPanel>
     )
   }

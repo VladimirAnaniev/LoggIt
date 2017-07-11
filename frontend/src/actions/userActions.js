@@ -3,7 +3,7 @@ import {
   CHANGE_USERS_COUNT
 } from './actionTypes'
 import REST from '../utilities/rest'
-import { fetchSuccess, fetchError, loading } from './feedbackActions'
+import { fetchError, loading } from './feedbackActions'
 
 export function fetchProfile () {
   return (dispatch) => {

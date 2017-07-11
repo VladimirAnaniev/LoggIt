@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Navbar } from 'react-materialize'
 
-function NavBar ({isLoggedIn = false}) {
+function NavBar ({isLoggedIn = false, isAdmin = false}) {
   if (isLoggedIn) {
     return (
       <Navbar className='blue-grey darken-4' brand="LoggIt" right>
+        {isAdmin && <li><NavLink to="/admin">Admin Panel</NavLink></li>}
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to="/workouts">Workouts</NavLink></li>
         <li><NavLink to="/profile">Profile</NavLink></li>
@@ -26,12 +27,14 @@ function NavBar ({isLoggedIn = false}) {
 }
 
 NavBar.propTypes = {
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  isAdmin: PropTypes.bool
 }
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    isAdmin: state.auth.isAdmin
   }
 }
 

@@ -31,6 +31,12 @@ module.exports = new PassportLocalStrategy({
         return done(error)
       }
 
+      if (savedUser.isBlocked) {
+        const error = new Error('Unauthorized.')
+        error.name = 'IncorrectCredentialsError'
+        return done(error)
+      }
+
       const payload = {
         sub: savedUser._id
       }
@@ -39,14 +45,14 @@ module.exports = new PassportLocalStrategy({
       const token = jwt.sign(payload, 's0m3 r4nd0m str1ng')
       const data = {
         email: savedUser.email,
-        name: savedUser.name
+        name: savedUser.name,
+        roles: savedUser.roles
       }
       return done(null, token, data)
     })
     .catch(err => {
       console.log(err)
       const error = new Error('Error while logging in')
-      error.name = 'InternalServerError'
       return done(error)
     })
 })
