@@ -1,7 +1,9 @@
 import {
   CHANGE_REGISTER_FORM,
   CHANGE_LOGIN_FORM,
-  CHANGE_LOGIN_STATE} from './actionTypes'
+  CHANGE_LOGIN_STATE,
+  RESET_AUTH_FORMS
+} from './actionTypes'
 import REST from '../utilities/rest'
 import Auth from '../utilities/Auth'
 import Validator from '../utilities/Validator'
@@ -44,6 +46,7 @@ function registerSuccess (user) {
     dispatch(success('Registration successful.'))
     dispatch(loading(false))
     dispatch(login({email: user.email, password: user.password}))
+    dispatch(resetAuthForms)
   }
 }
 
@@ -79,6 +82,7 @@ function loginSuccess (token, user) {
     dispatch(loading(false))
     Auth.authenticateUser(token)
     Auth.saveUser(user)
+    dispatch(resetAuthForms)
   }
 }
 
@@ -108,3 +112,5 @@ export function logout() {
     dispatch(changeLoginState(false))
   }
 }
+
+const resetAuthForms = {type: RESET_AUTH_FORMS}

@@ -21,7 +21,7 @@ class Workouts extends Component {
     const count = workouts.length
     return (
       <CardPanel>
-        <Button onClick={() => {this.props.history.push('/workout/add')}}>Add new workout</Button>
+        <Button onClick={() => {this.props.history.push('/workout/create')}}>Add new workout</Button>
         {count > 0 ? (
           <div>
             <WorkoutsTable workouts={workouts} />

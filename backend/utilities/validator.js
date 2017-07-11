@@ -57,4 +57,10 @@ module.exports = class Validator {
       errors
     }
   }
+
+  static validateWorkoutForm (workout) { // TODO
+    return {
+      success: true
+    }
+  }
 }
