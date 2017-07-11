@@ -5,10 +5,11 @@ import {
   SET_WORKOUT_PAGES_COUNT,
   CHANGE_WORKOUT_FORM,
   WORKOUT_CREATED,
-  RESET_WORKOUT_FORM
+  RESET_WORKOUT_FORM,
+  CHANGE_WORKOUTS_COUNT
 } from './actionTypes'
 import REST from '../utilities/rest'
-import { error, success, loading } from './feedbackActions'
+import { fetchSuccess, fetchError, loading } from './feedbackActions'
 
 export function fetchWorkouts (page = 1) {
   return (dispatch) => {
@@ -115,20 +116,6 @@ export function fetchWorkoutDetails (id) {
   }
 }
 
-function fetchError (message) {
-  return (dispatch) => {
-    dispatch(error(message))
-    dispatch(loading(false))
-  }
-}
-
-function fetchSuccess (message) {
-  return (dispatch) => {
-    dispatch(success(message))
-    dispatch(loading(false))
-  }
-}
-
 export function deleteWorkout (id) {
   return (dispatch) => {
     dispatch(loading(true))
@@ -185,4 +172,27 @@ export function fetchEditWorkout (id) {
         dispatch(fetchError(err.message))
       })
   }
+}
+
+export function getAllWorkoutsCount () {
+  return (dispatch) => {
+    dispatch(loading(true))
+
+    REST.get('workout/workoutsCount')
+      .then(result => {
+        if(result.success) {
+          dispatch(changeWorkoutsCount(result.count))
+          dispatch(loading(false))
+        } else {
+          dispatch(fetchError(result.message))
+        }
+      })
+      .catch(err => {
+        dispatch(fetchError(err.message))
+      })
+  }
+}
+
+function changeWorkoutsCount (newState) {
+  return {type: CHANGE_WORKOUTS_COUNT, newState}
 }

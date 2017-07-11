@@ -77,7 +77,7 @@ class WorkoutForm extends Component {
           />
         ))}
         <Button waves='light' onClick={this.handleExerciseAddition}>Add exercise</Button>
-        <Button waves='light' onClick={onSubmit}>Create</Button>
+        <Button className='green' waves='light' onClick={onSubmit}>Create</Button>
       </Row>
     )
   }

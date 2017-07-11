@@ -19,7 +19,7 @@ export default function Routes () {
       <Route path='/' exact component={Home} />
       <UnauthorizedOnlyRoute path='/login' component={Login} />
       <UnauthorizedOnlyRoute path='/register' component={Register} />
-      <PrivateRoute path='/profile' component={Profile} />
+      <PrivateRoute exact path='/profile' component={Profile} />
       <PrivateRoute path='/logout' component={Logout} />
       <PrivateRoute path='/workouts' component={Workouts} />
       <PrivateRoute path='/workout/create' component={CreateWorkout} />

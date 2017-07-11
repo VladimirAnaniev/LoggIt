@@ -43,7 +43,7 @@ export default function ExerciseForm ({name, sets, reps, weight, onDelete, onCha
         value={weight}
         onChange={onChange} />
       <Col s={2}>
-        <Button waves='light' onClick={onDelete}><Icon>clear</Icon></Button>
+        <Button className='red' waves='light' onClick={onDelete}><Icon>clear</Icon></Button>
       </Col>
     </Row>
   )

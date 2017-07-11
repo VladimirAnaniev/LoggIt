@@ -22,8 +22,8 @@ export default function WorkoutsTable ({workouts, onDelete}) {
           <td>{w.date}</td>
           <td>{w.exercises.length}</td>
           <td>
-            <Link to={`/workout/${w._id}/edit`}>Edit</Link>
-            <Button onClick={onDelete(w._id)}>Delete</Button>
+            <Link className="btn" to={`/workout/${w._id}/edit`}>Edit</Link>
+            <Button className='red' onClick={onDelete(w._id)}>Delete</Button>
           </td>
         </tr>))}
       </tbody>

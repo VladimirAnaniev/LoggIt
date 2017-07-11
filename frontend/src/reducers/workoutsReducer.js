@@ -5,7 +5,8 @@ import {
   SET_WORKOUT_PAGES_COUNT,
   CHANGE_WORKOUT_FORM,
   WORKOUT_CREATED,
-  RESET_WORKOUT_FORM
+  RESET_WORKOUT_FORM,
+  CHANGE_WORKOUTS_COUNT
 } from '../actions/actionTypes'
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
     name: '',
     exercises: []
   },
-  wasCreated: false
+  wasCreated: false,
+  workoutsCount: 0
 }
 
 export default function workoutsReducer (state = initialState, action) {
@@ -57,6 +59,10 @@ export default function workoutsReducer (state = initialState, action) {
           name: '',
           exercises: []
         }
+      })
+    case CHANGE_WORKOUTS_COUNT:
+      return Object.assign({}, state, {
+        workoutsCount: action.newState
       })
     default:
       return state

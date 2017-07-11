@@ -108,6 +108,7 @@ export function changeLoginState (newState) {
 export function logout() {
   return (dispatch) => {
     Auth.deauthenticateUser()
+    Auth.removeUser()
     dispatch(success('Logout successful.'))
     dispatch(changeLoginState(false))
   }

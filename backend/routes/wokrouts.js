@@ -90,6 +90,24 @@ router.post('/create', authCheck, (req, res) => {
   })
 })
 
+router.get('/workoutsCount', (req, res) => {
+  Workout
+    .find({})
+    .count()
+    .then(count => {
+      res.json({
+        success: true,
+        count
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        message: err.message
+      })
+    })
+})
+
 router.get('/:id', authCheck, (req, res) => {
   const id = req.params.id
 
