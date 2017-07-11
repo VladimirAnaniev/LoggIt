@@ -11,10 +11,8 @@
     "react-router-dom": "^4.1.1",
     "react-scripts": "1.0.10",
     "redux": "^3.7.1",
-    "redux-devtools": "^3.4.0",
     "redux-thunk": "^2.2.0",
-    "styled-components": "^2.1.1",
-    "toastr": "^2.1.2"
+    "styled-components": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
