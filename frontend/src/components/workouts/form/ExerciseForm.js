@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Row, Input, Button } from 'react-materialize'
+import { Row, Input, Button, Col, Icon } from 'react-materialize'
 
 Input.propTypes = {
   name: PropTypes.string,
@@ -42,7 +42,9 @@ export default function ExerciseForm ({name, sets, reps, weight, onDelete, onCha
         s={2}
         value={weight}
         onChange={onChange} />
-      <Button waves='light' onClick={onDelete}>Remove</Button>
+      <Col s={2}>
+        <Button waves='light' onClick={onDelete}><Icon>clear</Icon></Button>
+      </Col>
     </Row>
   )
 }

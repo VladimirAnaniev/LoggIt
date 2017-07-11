@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Row, Col, CardPanel } from 'react-materialize'
 import CreateWorkoutForm from '../form/WorkoutFrom'
-import {createWorkout, changeWorkoutFormState} from '../../../actions/workoutsActions'
+import {editWorkout, changeWorkoutFormState, fetchEditWorkout} from '../../../actions/workoutsActions'
 import { Redirect } from 'react-router-dom'
 
 class CreateWorkout extends Component {
@@ -15,9 +15,13 @@ class CreateWorkout extends Component {
     wasCreated: PropTypes.bool
   }
 
+  componentWillMount = () => {
+    this.props.dispatch(fetchEditWorkout(this.props.match.params.id))
+  }
+
   handleFormSubmit = (event) => {
     event.preventDefault()
-    this.props.dispatch(createWorkout(this.props.formState))
+    this.props.dispatch(editWorkout(this.props.match.params.id, this.props.formState))
   }
 
   handleFormDataChange = (event) => {

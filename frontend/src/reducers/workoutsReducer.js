@@ -3,9 +3,9 @@ import {
   LOAD_WROKOUTS,
   CHANGE_PAGE,
   SET_WORKOUT_PAGES_COUNT,
-  CHANGE_WORKOUT_CREATE_FORM,
+  CHANGE_WORKOUT_FORM,
   WORKOUT_CREATED,
-  RESET_CREATE_WORKOUT_FORM
+  RESET_WORKOUT_FORM
 } from '../actions/actionTypes'
 
 const initialState = {
@@ -40,9 +40,9 @@ export default function workoutsReducer (state = initialState, action) {
       })
     case SET_WORKOUT_PAGES_COUNT:
       return Object.assign({}, state, {
-        pagesCount: action.newCount
+        pages: action.newCount
       })
-    case CHANGE_WORKOUT_CREATE_FORM:
+    case CHANGE_WORKOUT_FORM:
       return Object.assign({}, state, {
         formState: action.newState
       })
@@ -50,7 +50,7 @@ export default function workoutsReducer (state = initialState, action) {
       return Object.assign({}, state, {
         wasCreated: true
       })
-    case RESET_CREATE_WORKOUT_FORM:
+    case RESET_WORKOUT_FORM:
       return Object.assign({}, state, {
         wasCreated: false,
         formState: {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 // import PropTypes from 'prop-types'
-import { fetchWorkouts, changePage, getPagesCount } from '../../actions/workoutsActions'
+import { fetchWorkouts, changePage, getPagesCount, deleteWorkout } from '../../actions/workoutsActions'
 import { CardPanel, Button, Pagination } from 'react-materialize'
 import WorkoutsTable from './WorkoutsTable'
 
@@ -16,6 +16,10 @@ class Workouts extends Component {
     this.props.dispatch(changePage(page))
   }
 
+  handleWorkoutDeletion = (id) => () => {
+    this.props.dispatch(deleteWorkout(id))
+  }
+
   render () {
     const {workouts, page, pages} = this.props
     const count = workouts.length
@@ -24,7 +28,7 @@ class Workouts extends Component {
         <Button onClick={() => {this.props.history.push('/workout/create')}}>Add new workout</Button>
         {count > 0 ? (
           <div>
-            <WorkoutsTable workouts={workouts} />
+            <WorkoutsTable workouts={workouts} onDelete={this.handleWorkoutDeletion} />
             <Pagination items={pages} activePage={page} onSelect={this.handlePageSelect} />
           </div>
         ) : (

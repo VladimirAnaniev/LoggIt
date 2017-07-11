@@ -11,6 +11,7 @@ import NotFound from '../../home/NotFound'
 import Workouts from '../../workouts/Workouts'
 import CreateWorkout from '../../workouts/create/CreateWorkout'
 import WorkoutDetails from '../../workouts/details/WorkoutDetails'
+import EditWorkout from '../../workouts/edit/EditWorkout'
 
 export default function Routes () {
   return (
@@ -22,7 +23,8 @@ export default function Routes () {
       <PrivateRoute path='/logout' component={Logout} />
       <PrivateRoute path='/workouts' component={Workouts} />
       <PrivateRoute path='/workout/create' component={CreateWorkout} />
-      <PrivateRoute path='/workout/:id' component={WorkoutDetails} />
+      <PrivateRoute exact path='/workout/:id' component={WorkoutDetails} />
+      <PrivateRoute path='/workout/:id/edit' component={EditWorkout} />
       <Route component={NotFound} />
     </Switch>
   )

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Row, Input, Button } from 'react-materialize'
 import ExerciseForm from './ExerciseForm'
 import { connect } from 'react-redux'
-import { changeCreateFormState } from '../../../actions/workoutsActions'
+import { changeWorkoutFormState } from '../../../actions/workoutsActions'
 
 class WorkoutForm extends Component {
   static propTypes = {
@@ -23,7 +23,7 @@ class WorkoutForm extends Component {
       //  removes the element at [index]   ^^^
     })
 
-    this.props.dispatch(changeCreateFormState(newFormState))
+    this.props.dispatch(changeWorkoutFormState(newFormState))
   }
 
   handleExerciseChange = (index) => (event) => {
@@ -42,7 +42,7 @@ class WorkoutForm extends Component {
       exercises: [...oldExercises.slice(0, index), newExercise, ...oldExercises.slice(index + 1)]
     })
 
-    this.props.dispatch(changeCreateFormState(newState))
+    this.props.dispatch(changeWorkoutFormState(newState))
   }
 
   handleExerciseAddition = () => {
@@ -52,7 +52,7 @@ class WorkoutForm extends Component {
       exercises: [...this.props.formState.exercises, newExercise]
     })
 
-    this.props.dispatch(changeCreateFormState(newExercises))
+    this.props.dispatch(changeWorkoutFormState(newExercises))
   }
 
   render () {
