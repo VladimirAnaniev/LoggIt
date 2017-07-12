@@ -1,9 +1,11 @@
 import {
-  LOAD_ALL_USERS
+  LOAD_ALL_USERS,
+  CHANGE_PAGE
 } from '../actions/actionTypes'
 
 const initialState = {
-  users: []
+  users: [],
+  page: 1
 }
 
 export default function usersReducer (state = initialState, action) {
@@ -11,6 +13,10 @@ export default function usersReducer (state = initialState, action) {
     case LOAD_ALL_USERS:
       return Object.assign({}, state, {
         users: action.newState
+      })
+    case CHANGE_PAGE:
+      return Object.assign({}, state, {
+        page: action.page
       })
     default:
       return state

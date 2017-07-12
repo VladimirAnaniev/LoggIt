@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
-import {getAllUsers, toggleAdminState, toggleBlockedState} from '../../actions/adminActions'
+import {
+  getAllUsers,
+  toggleAdminState,
+  toggleBlockedState,
+  changePage
+} from '../../actions/adminActions'
+import {getAllUsersCount} from '../../actions/userActions'
 import UsersTable from './UsersTable'
-import {CardPanel} from 'react-materialize'
+import {CardPanel, Pagination} from 'react-materialize'
 
 class Admin extends Component {
   static propTypes = {
@@ -11,7 +17,8 @@ class Admin extends Component {
   }
 
   componentWillMount = () => {
-    this.props.dispatch(getAllUsers())
+    this.props.dispatch(getAllUsers(this.props.page))
+    this.props.dispatch(getAllUsersCount())
   }
 
   handleUserBlock = (id, prevState) => () => {
@@ -22,8 +29,13 @@ class Admin extends Component {
     this.props.dispatch(toggleAdminState(id, !prevState))
   }
 
+  handlePageSelect = (page) => {
+    this.props.dispatch(changePage(page))
+    this.props.dispatch(getAllUsers(page))
+  }
+
   render () {
-    const {users} = this.props
+    const {users, page, usersCount} = this.props
     return (
       <CardPanel>
         <h2>Admin Panel</h2>
@@ -31,6 +43,7 @@ class Admin extends Component {
           users={users}
           onBlock={this.handleUserBlock}
           onMakeAdmin={this.handleToggleAdmin} />
+        <Pagination items={Math.ceil(usersCount / 10)} activePage={page} onSelect={this.handlePageSelect} />
       </CardPanel>
     )
   }
@@ -38,7 +51,9 @@ class Admin extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.admin.users
+    users: state.admin.users,
+    usersCount: state.users.usersCount,
+    page: state.admin.page
   }
 }
 

@@ -4,6 +4,33 @@ const User = require('../data/User')
 // const Validator = require('../utilities/validator')
 
 const router = new express.Router()
+const pageSize = 10
+
+router.post('/profile', authCheck, (req, res) => {
+  const user = req.user
+  const updated = req.body
+
+  // TODO: validate form
+
+  user.name = updated.name
+  if (updated.age) user.age = updated.age
+  if (updated.location) user.location = updated.location
+
+  user.save()
+    .then(updated => {
+      res.json({
+        success: true,
+        message: 'Profile updated successfully',
+        updated
+      })
+    })
+    .catch(err => {
+      res.json({
+        success: false,
+        message: err.message
+      })
+    })
+})
 
 router.get('/profile', authCheck, (req, res) => {
   const user = req.user
@@ -34,6 +61,7 @@ router.get('/usersCount', (req, res) => {
 
 router.get('/all', authCheck, (req, res) => {
   const user = req.user
+  const page = parseInt(req.query.page) || 1
 
   if (user.roles.indexOf('Admin') < 0) {
     return res.json({
@@ -43,6 +71,8 @@ router.get('/all', authCheck, (req, res) => {
   }
 
   User.find()
+    .skip((page - 1) * pageSize)
+    .limit(pageSize)
     .then(users => {
       res.json({
         success: true,

@@ -1,5 +1,5 @@
 import {
-  LOAD_PROFILE_DATA,
+  CHANGE_PROFILE_DATA,
   CHANGE_USERS_COUNT
 } from '../actions/actionTypes'
 
@@ -7,6 +7,8 @@ const initialState = {
   profile: {
     email: '',
     name: '',
+    age: '',
+    location: '',
     roles: []
   },
   usersCount: 0
@@ -14,7 +16,7 @@ const initialState = {
 
 export default function usersReducer (state = initialState, action) {
   switch (action.type) {
-    case LOAD_PROFILE_DATA:
+    case CHANGE_PROFILE_DATA:
       return Object.assign({}, state, {
         profile: action.profile
       })

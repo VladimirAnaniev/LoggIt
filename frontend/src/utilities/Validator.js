@@ -30,4 +30,16 @@ export default class Validator {
 
     return {isValid: true}
   }
+
+  static validateWorkoutForm (workout) {
+    if (!workout || workout.name.trim().length === 0) {
+      return {isValid: false, message: 'Please provide a name for the workout.'}
+    }
+
+    if (!workout || !workout.exercises) {
+      return {isValid: false, message: 'Please provide your exercises'}
+    }
+
+    return {isValid:true}
+  }
 }

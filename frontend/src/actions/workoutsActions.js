@@ -10,6 +10,7 @@ import {
 } from './actionTypes'
 import REST from '../utilities/rest'
 import { fetchSuccess, fetchError, loading } from './feedbackActions'
+import Validator from '../utilities/Validator'
 
 export function fetchWorkouts (page = 1) {
   return (dispatch) => {
@@ -53,6 +54,11 @@ export function getPagesCount () {
 export function createWorkout (workout) {
   return (dispatch) => {
     dispatch(loading(true))
+
+    const validation = Validator.validateWorkoutForm(workout)
+    if (!validation.isValid) {
+      fetchError(validation.message)
+    }
 
     REST.post('workout/create', workout, true)
       .then(result => {
@@ -138,6 +144,11 @@ export function deleteWorkout (id) {
 export function editWorkout (id, workout) {
   return (dispatch) => {
     dispatch(loading(true))
+
+    const validation = Validator.validateWorkoutForm(workout)
+    if (!validation.isValid) {
+      fetchError(validation.message)
+    }
 
     REST.post(`workout/${id}`, workout, true)
       .then(result => {

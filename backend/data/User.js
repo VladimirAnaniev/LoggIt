@@ -8,6 +8,8 @@ let userSchema = new mongoose.Schema({
   password: { type: String, required: REQUIRED },
   salt: String,
   name: { type: String, required: REQUIRED },
+  age: Number,
+  location: String,
   roles: [String],
   isBlocked: {type: Boolean, default: false}
 })

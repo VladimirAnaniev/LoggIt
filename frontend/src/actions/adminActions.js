@@ -1,14 +1,15 @@
 import {
-  LOAD_ALL_USERS
+  LOAD_ALL_USERS,
+  CHANGE_USERS_PAGE
 } from './actionTypes'
 import REST from '../utilities/rest'
 import { fetchSuccess, fetchError, loading } from './feedbackActions'
 
-export function getAllUsers () {
+export function getAllUsers (page = 1) {
   return (dispatch) => {
     dispatch(loading(true))
 
-    REST.get('user/all', true)
+    REST.get(`user/all?page=${page}`, true)
       .then(result => {
         if(result.success) {
           dispatch(loadAllUsers(result.users))
@@ -63,4 +64,8 @@ export function toggleBlockedState (id, newState) {
         dispatch(fetchError(err.message))
       })
   }
+}
+
+export function changePage (page) {
+  return {type: CHANGE_USERS_PAGE, page}
 }

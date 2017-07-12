@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { fetchWorkouts, changePage, getPagesCount, deleteWorkout } from '../../actions/workoutsActions'
 import { CardPanel, Button, Pagination } from 'react-materialize'
 import WorkoutsTable from './WorkoutsTable'
 
 class Workouts extends Component {
-  //static propTypes = {}
+  static propTypes = {
+    workouts: PropTypes.array,
+    page: PropTypes.number,
+    pages: PropTypes.number
+  }
+
   componentWillMount = () => {
     this.props.dispatch(getPagesCount())
-    this.props.dispatch(fetchWorkouts())
+    this.props.dispatch(fetchWorkouts(this.props.page))
   }
 
   handlePageSelect = (page) => {

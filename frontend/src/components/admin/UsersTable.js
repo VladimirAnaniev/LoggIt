@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table } from 'react-materialize'
 import { Button } from 'react-materialize'
+import Auth from '../../utilities/Auth'
 
 export default function UsersTable ({users, onBlock, onMakeAdmin}) {
   return (
@@ -21,17 +22,21 @@ export default function UsersTable ({users, onBlock, onMakeAdmin}) {
           <td>{u.name}</td>
           <td>{u.roles.join(', ')}</td>
           <td>
-            <Button
-              onClick={onMakeAdmin(u._id, u.roles.indexOf('Admin') >= 0)}
-            >
-              {u.roles.indexOf('Admin') < 0 ? 'Make admin' : 'Remove admin'}
-            </Button>
-            <Button
-              className='red darken-3'
-              onClick={onBlock(u._id, u.isBlocked)}
-            >
-              {u.isBlocked ? 'Unblock' : 'block'}
-            </Button>
+            {Auth.getUser().email !== u.email && (
+              <div>
+                <Button
+                  onClick={onMakeAdmin(u._id, u.roles.indexOf('Admin') >= 0)}
+                >
+                  {u.roles.indexOf('Admin') < 0 ? 'Make admin' : 'Remove admin'}
+                </Button>
+                <Button
+                  className='red darken-3'
+                  onClick={onBlock(u._id, u.isBlocked)}
+                >
+                  {u.isBlocked ? 'Unblock' : 'block'}
+                </Button>
+              </div>
+            )}
           </td>
         </tr>))}
       </tbody>
