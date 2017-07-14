@@ -1,6 +1,6 @@
 export default class Validator {
   static validateLogin (user) {
-    if (!user || user.email.trim().length === 0) { //TODO: check regex
+    if (!user || user.email.trim().length === 0) { // TODO: check regex
       return {isValid: false, message: 'Please provide your email address.'}
     }
 
@@ -8,11 +8,11 @@ export default class Validator {
       return {isValid: false, message: 'Please provide your password.'}
     }
 
-    return {isValid:true}
+    return {isValid: true}
   }
 
   static validateRegistration (user) {
-    if (!user || !user.email) { //TODO: check regex
+    if (!user || !user.email) { // TODO: check regex
       return {isValid: false, message: 'Please provide a correct email address.'}
     }
 
@@ -40,6 +40,6 @@ export default class Validator {
       return {isValid: false, message: 'Please provide your exercises'}
     }
 
-    return {isValid:true}
+    return {isValid: true}
   }
 }

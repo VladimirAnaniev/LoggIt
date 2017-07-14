@@ -1,28 +1,27 @@
 import React from 'react'
-import { Table } from 'react-materialize'
-import { Button } from 'react-materialize'
+import { Table, Button } from 'react-materialize'
 import Auth from '../../utilities/Auth'
 
 export default function UsersTable ({users, onBlock, onMakeAdmin}) {
   return (
     <Table>
       <thead>
-      <tr>
-        <th data-field="email">Email</th>
-        <th data-field="name">Name</th>
-        <th data-field="roles">Roles</th>
-        <th data-field="actions">Actions</th>
-      </tr>
+        <tr>
+          <th data-field='email'>Email</th>
+          <th data-field='name'>Name</th>
+          <th data-field='roles'>Roles</th>
+          <th data-field='actions'>Actions</th>
+        </tr>
       </thead>
 
       <tbody>
-      {users.map(u => (
-        <tr key={u._id}>
-          <td>{u.email}</td>
-          <td>{u.name}</td>
-          <td>{u.roles.join(', ')}</td>
-          <td>
-            {Auth.getUser().email !== u.email && (
+        {users.map(u => (
+          <tr key={u._id}>
+            <td>{u.email}</td>
+            <td>{u.name}</td>
+            <td>{u.roles.join(', ')}</td>
+            <td>
+              {Auth.getUser().email !== u.email && (
               <div>
                 <Button
                   onClick={onMakeAdmin(u._id, u.roles.indexOf('Admin') >= 0)}
@@ -37,8 +36,8 @@ export default function UsersTable ({users, onBlock, onMakeAdmin}) {
                 </Button>
               </div>
             )}
-          </td>
-        </tr>))}
+            </td>
+          </tr>))}
       </tbody>
     </Table>
   )

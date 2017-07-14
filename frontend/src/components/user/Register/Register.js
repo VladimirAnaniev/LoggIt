@@ -21,7 +21,7 @@ class Register extends Component {
       password: '',
       confirmPassword: '',
       name: ''
-    },
+    }
   }
 
   handleFormSubmit = (event) => {
@@ -57,7 +57,7 @@ class Register extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    formState: state.auth.registerForm,
+    formState: state.auth.registerForm
   }
 }
 

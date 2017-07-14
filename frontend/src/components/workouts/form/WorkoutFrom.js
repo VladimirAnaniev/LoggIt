@@ -66,9 +66,9 @@ class WorkoutForm extends Component {
     return (
       <Row>
         <Input
-          name="name"
-          type="text"
-          label="Name"
+          name='name'
+          type='text'
+          label='Name'
           s={12}
           value={name}
           onChange={onChange}
@@ -83,7 +83,7 @@ class WorkoutForm extends Component {
         ))}
         <Button waves='light' onClick={this.handleExerciseAddition}>Add exercise</Button>
         <Button className='green' waves='light' onClick={onSubmit}>Create</Button>
-        <Link to="/workouts" className='btn' waves='light' onClick={this.cancel}>Cancel</Link>
+        <Link to='/workouts' className='btn' waves='light' onClick={this.cancel}>Cancel</Link>
       </Row>
     )
   }

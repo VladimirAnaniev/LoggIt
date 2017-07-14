@@ -13,8 +13,3 @@ module.exports = (app) => {
   passport.use('local-signup', localSignupStrategy)
   passport.use('local-login', localLoginStrategy)
 }
-
-
-
-
-

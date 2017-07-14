@@ -39,21 +39,21 @@ class Profile extends Component {
         <p>Email: {profile.email}</p>
         <p>Roles: {profile.roles.join(', ')}</p>
         <Input
-          name="name"
-          type="text"
-          label="Name"
+          name='name'
+          type='text'
+          label='Name'
           value={profile.name}
           onChange={this.handleProfileUpdate} />
         <Input
-          name="age"
-          type="number"
-          label="Age"
+          name='age'
+          type='number'
+          label='Age'
           value={profile.age}
           onChange={this.handleProfileUpdate} />
         <Input
-          name="location"
-          type="text"
-          label="Location"
+          name='location'
+          type='text'
+          label='Location'
           value={profile.location}
           onChange={this.handleProfileUpdate} />
         <Button onClick={this.handleSubmit}>Update</Button>

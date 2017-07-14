@@ -19,9 +19,9 @@ class Home extends Component {
         <h3>A place to store your workout journals and track your progress in the gym</h3>
         <p>Our {usersCount} users have completed {workoutsCount} workouts.</p>
         {isLoggedIn ? (
-          <Link className="btn" to="/workout/create">Start a workout</Link>
+          <Link className='btn' to='/workout/create'>Start a workout</Link>
         ) : (
-          <Link className="btn" to="/login">Sign in</Link>
+          <Link className='btn' to='/login'>Sign in</Link>
         )}
       </CardPanel>
     )

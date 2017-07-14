@@ -15,30 +15,30 @@ export default function ExerciseForm ({name, sets, reps, weight, onDelete, onCha
   return (
     <Row>
       <Input
-        name="name"
-        type="text"
-        label="Name"
+        name='name'
+        type='text'
+        label='Name'
         s={4}
         value={name}
         onChange={onChange} />
       <Input
-        name="sets"
-        type="number"
-        label="Sets"
+        name='sets'
+        type='number'
+        label='Sets'
         s={2}
         value={sets}
         onChange={onChange} />
       <Input
-        name="reps"
-        type="number"
-        label="Reps"
+        name='reps'
+        type='number'
+        label='Reps'
         s={2}
         value={reps}
         onChange={onChange} />
       <Input
-        name="weight"
-        type="number"
-        label="Weight"
+        name='weight'
+        type='number'
+        label='Weight'
         s={2}
         value={weight}
         onChange={onChange} />

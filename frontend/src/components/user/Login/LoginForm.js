@@ -16,16 +16,16 @@ export default function LoginForm ({user, onChange, onSubmit}) {
   return (
     <Row>
       <Input
-        name="email"
-        type="email"
-        label="Email"
+        name='email'
+        type='email'
+        label='Email'
         s={12}
         value={user.email}
         onChange={onChange} />
       <Input
-        name="password"
-        type="password"
-        label="Password"
+        name='password'
+        type='password'
+        label='Password'
         s={12}
         value={user.password}
         onChange={onChange} />

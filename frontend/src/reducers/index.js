@@ -9,4 +9,3 @@ import admin from './adminReducer'
 const reducers = combineReducers({auth, feedback, workouts, users, admin})
 
 export default reducers
-
