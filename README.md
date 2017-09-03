@@ -2,7 +2,7 @@
 A Single Page Application for logging workouts and tracking progress.
 
 ## Installation
-``````````
+`````````` Bash
 $ git clone https://github.com/VladimirAnaniev/LoggIt.git
 $ cd LoggIt
 $ cd backend && yarn install
@@ -12,12 +12,12 @@ $ cd ../frontend && yarn install
 ## Running
 ### Backend
 Make sure you are running mongo prior to starting the backend server
-``````````
+`````````` Bash
 $ cd backend && yarn start
 ``````````
 
 ### Frontend
-``````````
+`````````` Bash
 $ cd frontend && yarn start
 ``````````
 
